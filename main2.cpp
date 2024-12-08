@@ -8,22 +8,22 @@
 int main() {
     WSADATA wsaData;
     SOCKET sock;
-    sockaddr_in serv_addr;
-    const char* message = "Hola servidor!";
+    sockaddr_in serv_address;
+    const char* message = "Hola server!";
     char buffer[1024] = {0};
 
     WSAStartup(MAKEWORD(2, 2), &wsaData);
     sock = socket(AF_INET, SOCK_STREAM, 0);
 
-    serv_addr.sin_family = AF_INET;
-    serv_addr.sin_port = htons(PORT);
-    inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr);
+    serv_address.sin_family = AF_INET;
+    serv_address.sin_port = htons(PORT);
+    inet_pton(AF_INET, "127.0.0.1", &serv_address.sin_addr);
 
-    connect(sock, (sockaddr*)&serv_addr, sizeof(serv_addr));
+    connect(sock, (sockaddr*)&serv_address, sizeof(serv_address));
     send(sock, message, strlen(message), 0);
     recv(sock, buffer, 1024, 0);
 
-    std::cout << "Servidor: " << buffer << "\n";
+    std::cout << "Server: " << buffer << "\n";
     closesocket(sock);
     WSACleanup();
 
