@@ -51,39 +51,32 @@
             margin-top: 20px;
             display: none;
         }
-        a {
-            color: #007bff;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>UF2 M9 PAC1</h1>
-    <p>César Arce</p>
+    <h1>Presentación del Trabajo</h1>
+    <p>Autor: [Tu Nombre]</p>
 </header>
 
 <section>
     <h2>Descripción</h2>
-    <p>Este proyecto tiene como objetivo comprender como funcionan los sockets.</p>
+    <p>Este proyecto tiene como objetivo [descripción breve del trabajo].</p>
 
     <h3>Repositorio</h3>
     <p>Para acceder al repositorio, resuelve el siguiente puzzle:</p>
     <button id="showPuzzleBtn">Mostrar puzzle (doble clic necesario)</button>
     
     <div id="puzzle-section">
-        <p id="puzzle">¿Cuánto es (12 × 8 + 34) ÷ 2?</p>
+        <p id="puzzle">Resuelve para <strong>x</strong>: 5x - 7 = 28</p>
         <input type="number" id="answer" placeholder="Tu respuesta aquí" />
         <button id="checkAnswerBtn">Verificar respuesta</button>
     </div>
 
     <div id="link-section">
         <p>¡Correcto! Aquí está el enlace al repositorio:</p>
-        <a href="https://github.com/tu-repositorio" target="_blank">Repositorio en GitHub</a>
+        <a id="repoLink" href="#" target="_blank"></a>
     </div>
 </section>
 
@@ -93,8 +86,17 @@
     const checkAnswerBtn = document.getElementById('checkAnswerBtn');
     const linkSection = document.getElementById('link-section');
     const answerInput = document.getElementById('answer');
+    const repoLink = document.getElementById('repoLink');
 
     let clickCount = 0;
+
+    
+    const encryptedLink = "aHR0cHM6Ly9naXRodWIuY29tL0xpbWluZXNzaWUvTTlVRjJwYWMxLmdpdA==";
+
+    
+    function decryptLink(hash) {
+        return atob(hash);
+    }
 
     // Mostrar el puzzle solo después de dos clics
     showPuzzleBtn.addEventListener('click', () => {
@@ -104,11 +106,14 @@
         }
     });
 
-    // Verificar la respuesta al puzzle
+    
     checkAnswerBtn.addEventListener('click', () => {
         const userAnswer = parseFloat(answerInput.value); 
-        const correctAnswer = (12 * 8 + 34) / 2; 
+        const correctAnswer = (28 + 7) / 5; 
         if (Math.abs(userAnswer - correctAnswer) < 0.001) { 
+            
+            repoLink.href = decryptLink(encryptedLink);
+            repoLink.textContent = "Repositorio en GitHub";
             linkSection.style.display = 'block';
         } else {
             alert('Respuesta incorrecta. Inténtalo de nuevo.');
