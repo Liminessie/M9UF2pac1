@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentación del Trabajo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #007bff; /* Azul */
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        section {
+            margin: 20px;
+            padding: 20px;
+            background-color: #e9ecef; /* Gris */
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            color: #007bff;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #puzzle-section {
+            margin-top: 20px;
+            display: none;
+        }
+        #puzzle {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        #link-section {
+            margin-top: 20px;
+            display: none;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>UF2 M9 PAC1</h1>
+    <p>César Arce</p>
+</header>
+
+<section>
+    <h2>Descripción</h2>
+    <p>Este proyecto tiene como objetivo comprender como funcionan los sockets.</p>
+
+    <h3>Repositorio</h3>
+    <p>Para acceder al repositorio, resuelve el siguiente puzzle:</p>
+    <button id="showPuzzleBtn">Mostrar puzzle (doble clic necesario)</button>
+    
+    <div id="puzzle-section">
+        <p id="puzzle">¿Cuánto es (12 × 8 + 34) ÷ 2?</p>
+        <input type="number" id="answer" placeholder="Tu respuesta aquí" />
+        <button id="checkAnswerBtn">Verificar respuesta</button>
+    </div>
+
+    <div id="link-section">
+        <p>¡Correcto! Aquí está el enlace al repositorio:</p>
+        <a href="https://github.com/tu-repositorio" target="_blank">Repositorio en GitHub</a>
+    </div>
+</section>
+
+<script>
+    const showPuzzleBtn = document.getElementById('showPuzzleBtn');
+    const puzzleSection = document.getElementById('puzzle-section');
+    const checkAnswerBtn = document.getElementById('checkAnswerBtn');
+    const linkSection = document.getElementById('link-section');
+    const answerInput = document.getElementById('answer');
+
+    let clickCount = 0;
+
+    // Mostrar el puzzle solo después de dos clics
+    showPuzzleBtn.addEventListener('click', () => {
+        clickCount++;
+        if (clickCount === 2) {
+            puzzleSection.style.display = 'block';
+        }
+    });
+
+    // Verificar la respuesta al puzzle
+    checkAnswerBtn.addEventListener('click', () => {
+        const userAnswer = parseFloat(answerInput.value); 
+        const correctAnswer = (12 * 8 + 34) / 2; 
+        if (Math.abs(userAnswer - correctAnswer) < 0.001) { 
+            linkSection.style.display = 'block';
+        } else {
+            alert('Respuesta incorrecta. Inténtalo de nuevo.');
+        }
+    });
+</script>
+
+</body>
+</html>

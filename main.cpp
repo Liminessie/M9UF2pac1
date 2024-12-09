@@ -32,7 +32,8 @@ int main() {
     WSACleanup();
 
     // Para compilar amobos códgios utiliza este comando
-    //g++ main.cpp -o server -lws2_32 g++ main2.cpp -o client -lws2_32
+    // g++ main.cpp -o server -lws2_32 
+    // g++ main2.cpp -o client -lws2_32
     // Para Ejecutar los siguientes:
     // ./server.exe
     // ./client.exe
