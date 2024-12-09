@@ -7,26 +7,10 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
             background-color: #f4f4f4;
             color: #333;
-        }
-        header {
-            background-color: #007bff; /* Azul */
-            color: white;
-            padding: 20px;
             text-align: center;
-        }
-        section {
-            margin: 20px;
             padding: 20px;
-            background-color: #e9ecef; /* Gris */
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        h1, h2, h3 {
-            color: #007bff;
         }
         button {
             background-color: #007bff;
@@ -43,10 +27,6 @@
             margin-top: 20px;
             display: none;
         }
-        #puzzle {
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
         #link-section {
             margin-top: 20px;
             display: none;
@@ -55,71 +35,58 @@
 </head>
 <body>
 
-<header>
     <h1>Presentación del Trabajo</h1>
     <p>Autor: [Tu Nombre]</p>
-</header>
 
-<section>
-    <h2>Descripción</h2>
-    <p>Este proyecto tiene como objetivo [descripción breve del trabajo].</p>
-
-    <h3>Repositorio</h3>
-    <p>Para acceder al repositorio, resuelve el siguiente puzzle:</p>
-    <button id="showPuzzleBtn">Mostrar puzzle (doble clic necesario)</button>
+    <h2>Repositorio</h2>
+    <p>Para acceder al repositorio, resuelve este puzzle:</p>
+    <button id="showPuzzleBtn">Mostrar Puzzle</button>
     
     <div id="puzzle-section">
-        <p id="puzzle">Resuelve para <strong>x</strong>: 5x - 7 = 28</p>
-        <input type="number" id="answer" placeholder="Tu respuesta aquí" />
+        <p>Resuelve para <strong>x</strong>: \(5x - 7 = 28\)</p>
+        <input type="number" id="answer" placeholder="Tu respuesta aquí">
         <button id="checkAnswerBtn">Verificar respuesta</button>
     </div>
 
     <div id="link-section">
         <p>¡Correcto! Aquí está el enlace al repositorio:</p>
-        <a id="repoLink" href="#" target="_blank"></a>
+        <a id="repoLink" href="#" target="_blank">Repositorio en GitHub</a>
     </div>
-</section>
 
-<script>
-    const showPuzzleBtn = document.getElementById('showPuzzleBtn');
-    const puzzleSection = document.getElementById('puzzle-section');
-    const checkAnswerBtn = document.getElementById('checkAnswerBtn');
-    const linkSection = document.getElementById('link-section');
-    const answerInput = document.getElementById('answer');
-    const repoLink = document.getElementById('repoLink');
+    <script>
+        const showPuzzleBtn = document.getElementById('showPuzzleBtn');
+        const puzzleSection = document.getElementById('puzzle-section');
+        const checkAnswerBtn = document.getElementById('checkAnswerBtn');
+        const linkSection = document.getElementById('link-section');
+        const answerInput = document.getElementById('answer');
+        const repoLink = document.getElementById('repoLink');
 
-    let clickCount = 0;
+        // Hash del enlace cifrado en Base64
+        const encryptedLink = "aHR0cHM6Ly9naXRodWIuY29tL0xpbWluZXNzaWUvTTlVRjJwYWMxLmdpdA==";
 
-    
-    const encryptedLink = "aHR0cHM6Ly9naXRodWIuY29tL0xpbWluZXNzaWUvTTlVRjJwYWMxLmdpdA==";
+        // Decodificación Base64
+        function decryptLink(hash) {
+            return atob(hash);
+        }
 
-    
-    function decryptLink(hash) {
-        return atob(hash);
-    }
-
-    // Mostrar el puzzle solo después de dos clics
-    showPuzzleBtn.addEventListener('click', () => {
-        clickCount++;
-        if (clickCount === 2) {
+        // Mostrar el puzzle
+        showPuzzleBtn.addEventListener('click', () => {
             puzzleSection.style.display = 'block';
-        }
-    });
+        });
 
-    
-    checkAnswerBtn.addEventListener('click', () => {
-        const userAnswer = parseFloat(answerInput.value); 
-        const correctAnswer = (28 + 7) / 5; 
-        if (Math.abs(userAnswer - correctAnswer) < 0.001) { 
-            
-            repoLink.href = decryptLink(encryptedLink);
-            repoLink.textContent = "Repositorio en GitHub";
-            linkSection.style.display = 'block';
-        } else {
-            alert('Respuesta incorrecta. Inténtalo de nuevo.');
-        }
-    });
-</script>
-
+        // Verificar la respuesta
+        checkAnswerBtn.addEventListener('click', () => {
+            const userAnswer = parseFloat(answerInput.value); // Convertir a número
+            const correctAnswer = (28 + 7) / 5; // Respuesta correcta: x = 7
+            if (Math.abs(userAnswer - correctAnswer) < 0.001) { // Tolerancia
+                // Desencriptar y mostrar el enlace
+                repoLink.href = decryptLink(encryptedLink);
+                linkSection.style.display = 'block';
+            } else {
+                alert('Respuesta incorrecta. Inténtalo de nuevo.');
+            }
+        });
+    </script>
 </body>
 </html>
+
